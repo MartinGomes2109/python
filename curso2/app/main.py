@@ -1,9 +1,9 @@
-import mod
+import python.curso2.app.modulos as modulos
 
-result = mod.get_datos()
+result = modulos.get_datos()
 print(result)
 
-print(mod.A)
+print(modulos.A)
 
 data = [
     {
@@ -26,7 +26,7 @@ data = [
 
 def run():
     Country = input('escribe un pais de latam : ')
-    result2 = mod.paises(data,Country)
+    result2 = modulos.paises(data,Country)
     if result2 == []:
         print('pais no se encuentra en la base de datos')
     else:
