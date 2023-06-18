@@ -13,7 +13,7 @@ def read_csv(path):
         return data
 
 if __name__ == '__main__':
-    data = read_csv('./app/population.csv')
+    data = read_csv('./population.csv')
     for i in range(0,10):
         print(data[i])
         

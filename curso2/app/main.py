@@ -1,36 +1,16 @@
-import python.curso2.app.modulos as modulos
-
-result = modulos.get_datos()
-print(result)
-
-print(modulos.A)
-
-data = [
-    {
-        'Country': 'colombia',
-        'Population': 500
-    },
-    {
-        'Country': 'Argentina',
-        'Population': 700
-    },
-    {
-        'Country': 'mexico',
-        'Population': 300
-    },
-    {
-        'Country': 'peru',
-        'Population': 400
-    }
-]
+import modulos
+import graficas
+import read_csv
 
 def run():
-    Country = input('escribe un pais de latam : ')
-    result2 = modulos.paises(data,Country)
-    if result2 == []:
-        print('pais no se encuentra en la base de datos')
-    else:
-        print(result2)
-        
+    data = read_csv.read_csv('./population.csv')
+    country = input('escribe un pais : ')
+    result2 = modulos.paises(data,country)
+    #si len es mayor a 0 es porque encontro un resulta, caso contrario no existe
+    if len(result2) > 0:
+        country = result2[0]
+        labels, values = modulos.get_poblacion(country)
+        graficas.generar_grafica_bar(labels, values)
+    
 if __name__ == '__main__':
     run()

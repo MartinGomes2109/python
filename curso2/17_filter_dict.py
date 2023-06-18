@@ -26,5 +26,6 @@ print(matches)
 print(len(matches))
 
 new_list = list(filter(lambda x: x['home_team_result'] == 'Win',matches))
+print('-----'*5)
 print(new_list)
 print(len(new_list))
