@@ -1,0 +1,29 @@
+tipado estatico en listas y diccionarios
+
+list[int]
+
+dict[str, int]
+
+list[dict[str, str]]
+
+Closures
+    un closures ocurre con funciones anidadas, la funcion interna tiene que usar una variable de la funcion mayor y retornar el resultado
+
+Decorador
+    basicamente es un closure, es una funcion que recibe como paremetro otra funcion, le añade cosas y retorna una funcion diferente
+    ejemplo:
+    #
+    def saludo():
+        print('hola')
+    
+    def decorador(func):
+        def envoltura():
+            print('esto es lo que se agrega')
+            func()
+            return envoltura
+
+    saludo = decorador(saludo)   ó      @decorador
+    saludo()                            def saludo():
+                                            print('hola')
+    #
+    la funcion envoltura 'decora' a la funcion saludo
