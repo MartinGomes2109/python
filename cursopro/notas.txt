@@ -118,3 +118,6 @@ para no hacer datetime.datetime -> from datetime import datetime
 zonas horarias
 pytz
 se tiene que instalar con pip
+zonas horarias -> https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+control + d -> seleccionar todas las palabras iguales
