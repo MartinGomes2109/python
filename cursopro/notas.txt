@@ -27,3 +27,94 @@ Decorador
                                             print('hola')
     #
     la funcion envoltura 'decora' a la funcion saludo
+
+iteradores
+ejemplo de clase personalizada
+"clase que implenta un iterador de todos los numeros pares, o los numeros pares hasta un maximo"
+class numerospares:
+    def __init__(self, max=None):
+        selt.max = max
+    def __iter__(self):
+        self.num = 0
+        return self
+    def __next__(self):
+        if not self.max or self.num <= self.max:
+            result = self.num
+            self.num += 2
+            return result
+        else:
+            raise StopIteration
+
+generadores
+Ejemplo de un generador
+
+def my_gen():
+    print('Hello world')
+    n = 0
+    yield #es lo mismo que return pero en ves de terminar la funcion pausa hasta donde esta el yield, si se llama la funcion de nuevo sigue donde se quedo
+
+    print('Hello heaven')
+    n = 1
+    yield n
+
+    print('Hello hell')
+    n = 2
+    yield n
+
+a = my_gen
+print(next(a)) #Hello world
+print(next(a)) #Hello heaven
+print(next(a)) #Hello hell
+print(next(a)) StopIteration
+
+sets
+lista inmutable con elementos unicos(sin repetidos)
+al convertir cualquier list en un set se eliminan los elementos repetidos
+set() -> convierte una lista en un set, eliminando los elementos repetidos
+.add() -> agrega el elemento al set
+.update() -> agrega los elementos que no estan en el set, los repetidos no se agregan
+.discard() -> elimina el elemento del set, si el elemento no esta no hace nada
+.remove() -> elimina el elemento del set, si el elemento no esta tira un error
+.pop() -> borra un elemento aleatorio
+.clear() -> borra todos los elementos, deja el set vacio
+
+operaciones con sets
+union
+    set1 = {3,4,5}, set2 = {5,6,7}
+    set3 = set1 | set1
+    set3 = {3,4,5,6,7}
+interseccion
+    set1 = {3,4,5}, set2 = {5,6,7}
+    set3 = set1 & set2
+    set3 = {5}
+diferencia(resta)
+    set1 = {3,4,5}, set2 = {5,6,7}
+    set3 = set1 - set2
+    set3 = {3,4}
+    set3 = set2 - set1
+    set3 = {6,7}
+diferencia simetrica(opuesto a interseccion)
+    set1 = {3,4,5}, set2 = {5,6,7}
+    set3 = set1 ^ set2
+    set3 = {3,4,6,7}
+
+not in -> para saber si un elemento no esta en la lista
+
+manejo de fechas
+usar datetime, ya instalado en python -> import datetime
+fecha y hora actual -> datetime.datetime.now()
+solo fecha -> datetime.datetime.today()
+solo año -> datetime.datetime.year()
+solo mes -> datetime.datetime.month()
+solo dia -> datetime.datetime.day()
+para no hacer datetime.datetime -> from datetime import datetime
+%Y -> año
+%m -> mes
+%d -> dia
+%M -> minuto
+%S -> segundo
+%H -> hora
+
+zonas horarias
+pytz
+se tiene que instalar con pip
