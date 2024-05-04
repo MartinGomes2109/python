@@ -24,8 +24,8 @@ def saludo(nom):
 
 def run():
     random_func()
-    suma(10,10)
-    saludo("cesar")
+#   suma(10,10)
+#    saludo("cesar")
     
 if __name__ == '__main__':
     run()
