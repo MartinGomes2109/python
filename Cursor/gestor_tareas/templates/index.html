@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        
+        .form-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .form-container h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        form {
+            display: flex;
+            gap: 10px;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 500;
+        }
+        
+        button:hover {
+            background: #5568d3;
+        }
+        
+        .tareas-container {
+            margin-top: 20px;
+        }
+        
+        .tareas-container h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .tareas-lista {
+            list-style: none;
+        }
+        
+        .tarea-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 4px solid #667eea;
+        }
+        
+        .tarea-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tarea-item.completada {
+            opacity: 0.6;
+            text-decoration: line-through;
+            border-left-color: #28a745;
+        }
+        
+        .tarea-texto {
+            flex: 1;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .tarea-item.completada .tarea-texto {
+            color: #6c757d;
+        }
+        
+        .tarea-acciones {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-completar {
+            background: #28a745;
+            padding: 8px 16px;
+            font-size: 14px;
+            text-decoration: none;
+            border-radius: 6px;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .btn-completar:hover {
+            background: #218838;
+        }
+        
+        .btn-completar:disabled,
+        .btn-completada {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .vacio {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+            font-size: 18px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .contador {
+            text-align: center;
+            color: #666;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Gestor de Tareas</h1>
+        
+        <div class="form-container">
+            <h2>Agregar Nueva Tarea</h2>
+            <form action="/agregar" method="POST">
+                <input type="text" name="texto_tarea" placeholder="Escribe una nueva tarea..." required>
+                <button type="submit">Agregar</button>
+            </form>
+        </div>
+        
+        <div class="tareas-container">
+            <h2>Lista de Tareas</h2>
+            <ul class="tareas-lista">
+                {% if tareas %}
+                    {% for tarea in tareas %}
+                    <li class="tarea-item {% if tarea.hecho %}completada{% endif %}">
+                        <span class="tarea-texto">{{ tarea.texto }}</span>
+                        <div class="tarea-acciones">
+                            {% if not tarea.hecho %}
+                            <a href="/completar/{{ tarea.id }}" class="btn-completar">✓ Completar</a>
+                            {% else %}
+                            <span class="btn-completar btn-completada">✓ Completada</span>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <li class="vacio">No hay tareas. ¡Agrega una nueva tarea arriba!</li>
+                {% endif %}
+            </ul>
+            
+            {% if tareas %}
+            <div class="contador">
+                Total: {{ tareas|length }} tarea{{ 's' if tareas|length != 1 else '' }} | 
+                Completadas: {{ tareas|selectattr('hecho')|list|length }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
